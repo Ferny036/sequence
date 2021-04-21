@@ -1,25 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { score } from "./sequence";
+
 
 function App() {
+
+  const [query, setQuery] = useState("");
+  const [subject, setSubject] = useState("");
+  const [res, setRes] = useState({ value: 0, index_i: 0, index_j: 0 });
+  let wasPressed: boolean = true;
+
+  //Component
+  type textType = { str: string, i: number, j: number };
+  const Txt = ({ str, i, j }: textType) => (
+    <>
+      {str.substring(0, i + 1)}
+      <span className={wasPressed ? "coincidence" : ""}>{str.substring(i + 1, j + 1)}</span>
+      {str.substring(j + 1, str.length)}
+    </>
+  );
+
+  const handleButton = () => {
+    wasPressed = true;
+    setRes(score(query, subject, 1, -1));
+  }
+
+  const handleInput = (value: string, fn: Function) => {
+    wasPressed = false
+    fn(value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <div className="form">
+        <h1>Alineación local</h1>
+        <input id="query" type="text" placeholder="Query" onChange={e => handleInput(e.target.value, setQuery)} />
+        <input id="subject" type="text" placeholder="Subject" onChange={e => handleInput(e.target.value, setSubject)} />
+        <button id="btn-handler" onClick={e => handleButton()} > Calcular </button>
+      </div>
+      <div className="result">
+        <p style={{ display: query.length > 0 ? "block" : "none" }} >Query</p>
+        <label id="querylabel"><Txt str={query} i={res.index_i} j={res.index_j} /></label>
+        <br />
+        <p style={{ display: subject.length > 0 ? "block" : "none" }} >Subject</p>
+        <label id="subjectlabel"><Txt str={subject} i={res.index_i} j={res.index_j} /></label>
+        <br />
+        <label id="resultlabel">{JSON.stringify(res)}</label>
+      </div>
+    </>
   );
 }
 

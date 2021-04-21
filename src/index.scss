@@ -1,0 +1,87 @@
+/* Color Theme Swatches in Hex */
+$primary: #BB2020; 
+$back: #06111C; 
+$shine: #BEC7C7; 
+$aux: #FFEB4D; 
+$back-aux: #121317; 
+$white: #FFF;
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $back;
+  color: $shine;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  padding: 5rem;
+}
+
+.coincidence{
+  color: #BB2020;
+}
+.form{
+  background-color: $back-aux;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  border-radius: 1rem;
+  border: $aux solid 0.2rem ;
+  position: relative;
+  h1{
+    color: $aux;
+    position: absolute;
+    top: 15%;
+  }
+}
+
+.result{
+  display: flex;
+  flex-flow: column wrap;
+  padding: 1rem;
+
+  p{
+    color: $white;
+  }
+
+  label{
+    display: block;
+    font-size: 2rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+}
+
+input[type="text"]{
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  border: 0;
+  margin: 3rem 1rem;
+  width: 20rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+  font-weight: bold;
+}
+
+button{
+  margin: 0rem 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.25rem;
+  border: 0;
+  color: $white;
+  background-color: $primary;
+  font-weight: bolder;
+  cursor: pointer;
+}
