@@ -7,7 +7,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState("");
   const [res, setRes] = useState({ value: 0, index_i: 0, index_j: 0 });
-  let wasPressed: boolean = true;
+  const [wasPressed, setWasPressed] = useState(false);
 
   //Component
   type textType = { str: string, i: number, j: number };
@@ -15,17 +15,17 @@ function App() {
     <>
       {str.substring(0, i + 1)}
       <span className={wasPressed ? "coincidence" : ""}>{str.substring(i + 1, j + 1)}</span>
-      {str.substring(j + 1, str.length)}
+      {str.substring(j + 1, str.length + 1)}
     </>
   );
 
   const handleButton = () => {
-    wasPressed = true;
+    setWasPressed(true);
     setRes(score(query, subject, 1, -1));
   }
 
   const handleInput = (value: string, fn: Function) => {
-    wasPressed = false
+    setWasPressed(false);
     fn(value);
   }
 
@@ -45,7 +45,7 @@ function App() {
         <p style={{ display: subject.length > 0 ? "block" : "none" }} >Subject</p>
         <label id="subjectlabel"><Txt str={subject} i={res.index_i} j={res.index_j} /></label>
         <br />
-        <label id="resultlabel">{JSON.stringify(res)}</label>
+        <label id="resultlabel">Puntuacion: {res.value}</label>
       </div>
     </>
   );
